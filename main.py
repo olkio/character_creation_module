@@ -1,11 +1,16 @@
 from random import randint
 
-# генерирует количество очков атаки в зависимости от
-# выбранного типа персонажа и возвращает строковое
-# сообщение о проведённой атаке
+# Новый импорт.
+# Из модуля start_game_banner, который расположен в папке graphic_arts,
+# импортируем функцию run_screensaver().
+from graphic_arts.start_game_banner import run_screensaver
 
 
 def attack(char_name, char_class):
+    """Генерирует количество очков атаки в зависимости от
+    выбранного типа персонажа и возвращает строковое
+    сообщение о проведённой атаке.
+    """
     if char_class == 'warrior':
         return (f'{char_name} нанёс урон противнику ',
                 f'равный {5 + randint(3, 5)}')
@@ -17,12 +22,12 @@ def attack(char_name, char_class):
                 f'равный {5 + randint(-3, -1)}')
     return (f'{char_name} не нанес урон противнику')
 
-# defence() — генерирует количество очков защиты в зависимости
-# от выбранного типа персонажа и возвращает строковое сообщение
-# о выполненном блокировании атаки.
-
 
 def defence(char_name, char_class):
+    """Генерирует количество очков защиты в зависимости
+    от выбранного типа персонажа и возвращает строковое сообщение
+    о выполненном блокировании атаки.
+    """
     if char_class == 'warrior':
         return (f'{char_name} блокировал {10 + randint(5, 10)} урона')
     if char_class == 'mage':
@@ -31,11 +36,11 @@ def defence(char_name, char_class):
         return (f'{char_name} блокировал {10 + randint(2, 5)} урона')
     return (f'{char_name} не блокировал урон')
 
-# special() — в зависимости от выбранного типа персонажа
-# возвращает сообщение о применении специального умения.
-
 
 def special(char_name, char_class):
+    """В зависимости от выбранного типа персонажа
+    возвращает сообщение о применении специального умения.
+    """
     if char_class == 'warrior':
         return (f'{char_name} применил специальное ',
                 f'умение «Выносливость {80 + 25}»')
@@ -45,12 +50,12 @@ def special(char_name, char_class):
         return (f'{char_name} применил специальное умение «Защита {10 + 30}»')
     return (f'{char_name} не применил специальное умение')
 
-# запускает цикл тренировки навыков персонажа.
-# В качестве параметров она получает введённое игроком имя персонажа
-# и выбранный тип персонажа
-
 
 def start_training(char_name, char_class):
+    """Запускает цикл тренировки навыков персонажа.
+    В качестве параметров она получает введённое игроком имя персонажа
+    и выбранный тип персонажа.
+    """
     if char_class == 'warrior':
         print(f'{char_name}, ты Воитель — отличный боец ближнего боя.')
     if char_class == 'mage':
@@ -73,11 +78,11 @@ def start_training(char_name, char_class):
             print(special(char_name, char_class))
     return 'Тренировка окончена.'
 
-# позволяет игроку выбрать тип игрового персонажа
-# и возвращает выбранный вариант
-
 
 def choice_char_class():
+    """Позволяет игроку выбрать тип игрового персонажа
+    и возвращает выбранный вариант.
+    """
     approve_choice = None
     char_class = None
     while approve_choice != 'y':
@@ -99,16 +104,14 @@ def choice_char_class():
     return char_class
 
 
-def main():
+if __name__ == '__main__':
+    run_screensaver()
     print('Приветствую тебя, искатель приключений!')
     print('Прежде чем начать игру...')
-    char_name = input('...назови себя: ')
+    char_name: str = input('...назови себя: ')
     print(f'Здравствуй, {char_name}! '
           'Сейчас твоя выносливость — 80, атака — 5 и защита — 10.')
     print('Ты можешь выбрать один из трёх путей силы:')
     print('Воитель, Маг, Лекарь')
-    char_class = choice_char_class()
+    char_class: str = choice_char_class()
     print(start_training(char_name, char_class))
-
-
-main()
